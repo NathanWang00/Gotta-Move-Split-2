@@ -78,6 +78,12 @@ public class Movement : MonoBehaviour
 
         Walk(dir);
         anim.SetHorizontalMovement(x, y, rb.velocity.y);
+        
+        //fast falling
+        if (Input.GetKeyDown("s") && rb.velocity.y < 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 2);
+        }
 
         if (coll.onWall && Input.GetButton("Fire3") && canMove)
         {
