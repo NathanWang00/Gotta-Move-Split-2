@@ -21,6 +21,22 @@ public class GameManager : MonoBehaviour
         else if (currentScene.name == "SampleScene")
         {
             SceneManager.LoadScene("Gotta Move 1");
+        } 
+        else
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
+    }
+
+    public void SwitchScenesDistinct()
+    {
+        if (currentScene.name != "Distinct")
+        {
+            SceneManager.LoadScene("Distinct");
+        }
+        else
+        {
+            SceneManager.LoadScene("Gotta Move 1");
         }
     }
 }
