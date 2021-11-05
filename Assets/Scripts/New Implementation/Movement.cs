@@ -33,6 +33,18 @@ public class Movement : MonoBehaviour
     public bool isDashing;
     public bool hasJumped = false;
 
+
+    //Initialize Publc Sound Effects, Assign Clips using Unity UI
+    [Space]
+    [Header("Audio")]
+    public AudioSource jump;
+    public AudioSource dash;
+    public AudioSource land;
+    public AudioSource run;
+    public AudioSource wall;
+    public AudioSource slide;
+
+
     [Space]
 
     private bool groundTouch;
@@ -73,10 +85,28 @@ public class Movement : MonoBehaviour
                 anim.Flip(side*-1);
             wallGrab = true;
             wallSlide = false;
+
+
+            if (slide.isPlaying)
+            {
+                slide.Stop();
+            }
+
+            //Start running sound if it is not playing and if the character is moving
+            if(rb.velocity.y != 0 && !wall.isPlaying)
+            {
+                wall.Play();
+            }
+            //Stops running if its playing and the character isn't moving
+            else if(rb.velocity.y == 0 && wall.isPlaying)
+            {
+                wall.Stop();
+            }
         }
 
         if (Input.GetButtonUp("Fire3") || !coll.onWall || !canMove)
         {
+            wall.Stop(); //stop walking up wall sound
             wallGrab = false;
             wallSlide = false;
         }
@@ -109,6 +139,11 @@ public class Movement : MonoBehaviour
                 wallSlide = true;
                 WallSlide();
             }
+        }
+
+        if((coll.onGround || !coll.onWall) && slide.isPlaying)
+        {
+            slide.Stop(); //stops slide sound from playing
         }
 
         if (!coll.onWall || coll.onGround)
@@ -199,6 +234,9 @@ public class Movement : MonoBehaviour
 
         side = anim.sr.flipX ? -1 : 1;
 
+        //play Landing Sound
+        land.Play();
+
         jumpParticle.Play();
     }
 
@@ -207,6 +245,9 @@ public class Movement : MonoBehaviour
         Camera.main.transform.DOComplete();
         Camera.main.transform.DOShakePosition(.2f, .5f, 14, 90, false, true);
         FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
+
+        //Play Dash Sound
+        dash.Play();
 
         hasDashed = true;
 
@@ -267,11 +308,18 @@ public class Movement : MonoBehaviour
 
     private void WallSlide()
     {
+        //Only Play Slide if the sound isn't already playing
+        if (!slide.isPlaying)
+            slide.Play();
+
         if(coll.wallSide != side)
          anim.Flip(side * -1);
 
         if (!canMove)
+        {
+            slide.Stop(); //stops slide sound  
             return;
+        }
 
         bool pushingWall = false;
         if((rb.velocity.x > 0 && coll.onRightWall) || (rb.velocity.x < 0 && coll.onLeftWall))
@@ -286,23 +334,53 @@ public class Movement : MonoBehaviour
     private void Walk(Vector2 dir)
     {
         if (!canMove)
+        {
+            run.Stop(); //Stops Running Sound From Continuing to play
             return;
+        }
 
         if (wallGrab)
+        {
+            run.Stop(); //Stops Running Sound From Continuing to play
             return;
+        }
 
         if (coll.onLeftWall && dir.x < 0)
+        {
+            run.Stop(); //Stops Running Sound From Continuing to play
             return;
+        }
 
         if (coll.onRightWall && dir.x > 0)
+        {
+            run.Stop(); //Stops Running Sound From Continuing to play
             return;
+        }
 
         if (!wallJumped)
         {
+            //Plays run if the sound isn't already playing, if the character is on the ground an if the character is moving
+            if (!run.isPlaying && coll.onGround && rb.velocity.x != 0)
+            {
+                run.Play();
+            }
+            //stops running sound for when the character walks off the platform without jumping
+            else if (!coll.onGround)
+            {
+                run.Stop(); //Stops Running Sound From Continuing to play
+            }
+            //Stops running if the character is just standing on the ground
+            else if (coll.onGround && rb.velocity.x == 0 && Input.GetAxis("Horizontal") == 0f)
+            {
+                run.Stop(); //Stops Running Sound From Continuing to play
+            }
+
+
             rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
         }
         else
         {
+            run.Stop(); //Stops Running Sound From Continuing to play
             rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
         }
     }
@@ -316,6 +394,9 @@ public class Movement : MonoBehaviour
         rb.velocity += dir * jumpForce;
 
         hasJumped = true;
+
+        //Play Jump Audio
+        jump.Play();
 
         particle.Play();
     }
