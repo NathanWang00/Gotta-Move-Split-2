@@ -8,7 +8,7 @@ namespace distinct
 
         private Animator anim;
         private Movement move;
-        private CollisionNew coll;
+        private distinct.CollisionNew coll;
         [HideInInspector]
         public SpriteRenderer sr;
 

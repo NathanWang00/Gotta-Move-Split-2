@@ -4890,9 +4890,9 @@ GameObject:
   m_Component:
   - component: {fileID: 213030896}
   - component: {fileID: 213030895}
-  - component: {fileID: 213030904}
-  - component: {fileID: 213030898}
   - component: {fileID: 213030905}
+  - component: {fileID: 213030898}
+  - component: {fileID: 213030904}
   - component: {fileID: 213030903}
   - component: {fileID: 213030902}
   - component: {fileID: 213030901}
@@ -5071,7 +5071,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 213030893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7cb68e5415d98d4b9b46b6c9d519014, type: 3}
+  m_Script: {fileID: 11500000, guid: f053976ff3fc28f4ba7df58b290db2f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 0}
@@ -5084,7 +5084,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 213030893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc4fe9a4dfac8e2489680385f0299ce5, type: 3}
+  m_Script: {fileID: 11500000, guid: 05e07dc4f5db8604caff371582425859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  onGround: 0
+  onWall: 0
+  onRightWall: 0
+  onLeftWall: 0
+  wallSide: 0
+  collisionRadius: 0.01
+  bottomOffset: {x: 0, y: -0.76}
+  rightOffset: {x: 0.33, y: -0.33}
+  leftOffset: {x: -0.33, y: -0.33}
+--- !u!114 &213030905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213030893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1857bc2ab8625c140b1b3ddd88055140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
@@ -5115,30 +5139,6 @@ MonoBehaviour:
   jumpParticle: {fileID: 708599380}
   wallJumpParticle: {fileID: 423702326}
   slideParticle: {fileID: 740709920}
---- !u!114 &213030905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213030893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77a0fb3fe1a774d4f89791772ee56b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  onGround: 0
-  onWall: 0
-  onRightWall: 0
-  onLeftWall: 0
-  wallSide: 0
-  collisionRadius: 0.1
-  bottomOffset: {x: 0, y: -0.76}
-  rightOffset: {x: 0.33, y: -0.33}
-  leftOffset: {x: -0.33, y: -0.33}
 --- !u!1 &234361388
 GameObject:
   m_ObjectHideFlags: 0
@@ -5183,7 +5183,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 234361388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07547f4398805b144a0be65505bca6fe, type: 3}
+  m_Script: {fileID: 11500000, guid: bb9d8a4584b068e4fb59342059d5fbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ghostsParent: {fileID: 234361389}
@@ -15376,7 +15376,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
