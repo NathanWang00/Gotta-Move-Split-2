@@ -260,7 +260,7 @@ public class Movement : MonoBehaviour
 
         Vector2 wallDir = coll.onRightWall ? Vector2.left : Vector2.right;
 
-        Jump((Vector2.up / 1.5f + wallDir / 1.5f), true);
+        Jump((Vector2.up / 1.5f + wallDir * Mathf.Abs(Input.GetAxis("Horizontal"))), true);
 
         wallJumped = true;
     }
