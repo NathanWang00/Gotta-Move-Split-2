@@ -37,11 +37,19 @@ public class CollisionNew : MonoBehaviour
     {  
         onGround = Physics2D.OverlapBox(new Vector2(body.bounds.center.x, body.bounds.center.y - body.bounds.size.y / 2),
             new Vector2(body.bounds.size.x - 0.05f, 0.02f), 0, groundLayer);
-        onWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer) 
-            || Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer);
 
-        onRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
-        onLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer);
+        // the orginal way to check on wall
+        // onRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
+        // onLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer);
+
+        // the new way to check on wall, basically draw two vertical box one on left. one on right
+        onRightWall = Physics2D.OverlapBox(new Vector2(body.bounds.center.x + body.bounds.size.x / 2, body.bounds.center.y), 
+            new Vector2(0.02f, body.bounds.size.y - 0.05f), 0, groundLayer);
+        onLeftWall = Physics2D.OverlapBox(new Vector2(body.bounds.center.x - body.bounds.size.x / 2, body.bounds.center.y), 
+            new Vector2(0.02f, body.bounds.size.y - 0.05f), 0, groundLayer);
+
+        onWall = onRightWall || onLeftWall;
+
 
         wallSide = onRightWall ? -1 : 1;
     }
