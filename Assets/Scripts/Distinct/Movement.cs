@@ -127,7 +127,7 @@ namespace distinct {
 
             if (wallGrab && !isDashing)
             {
-                rb.gravityScale = 0;
+               // rb.gravityScale = 0;
                 if (x > .2f || x < -.2f)
                     rb.velocity = new Vector2(rb.velocity.x, 0);
 
@@ -137,7 +137,7 @@ namespace distinct {
             }
             else
             {
-                rb.gravityScale = 3;
+                rb.gravityScale = 1.5f;
             }
 
             if (coll.onWall && !Input.GetButton("Jump"))
@@ -273,7 +273,7 @@ namespace distinct {
             DOVirtual.Float(14, 0, .8f, RigidbodyDrag);
 
             dashParticle.Play();
-            rb.gravityScale = 0;
+            //rb.gravityScale = 0;
             GetComponent<BetterJumping>().enabled = false;
             wallJumped = true;
             isDashing = true;
@@ -281,7 +281,7 @@ namespace distinct {
             yield return new WaitForSeconds(.3f);
 
             dashParticle.Stop();
-            rb.gravityScale = 3;
+            rb.gravityScale = 1.5f;
             GetComponent<BetterJumping>().enabled = true;
             wallJumped = false;
             isDashing = false;
