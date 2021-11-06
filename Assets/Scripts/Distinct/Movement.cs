@@ -21,6 +21,7 @@ namespace distinct {
         public float dashSpeed = 20;
         public float bufferTime = 1;
         public float coyoteTime = 1;
+        public float slipperyRun = 1;
 
         [Space]
         [Header("Booleans")]
@@ -381,7 +382,8 @@ namespace distinct {
                 }
 
 
-                rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
+                // rb.velocity = new Vector2(dir.x * speed, rb.velocity.y); // this is the original code
+                rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), slipperyRun * Time.deltaTime );
             }
             else
             {
