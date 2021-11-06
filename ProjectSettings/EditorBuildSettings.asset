@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gotta Move 1.unity
     guid: 4bd24f91919f3404c9eafe9d5dcf1c05
+  - enabled: 1
+    path: Assets/Scenes/Distinct.unity
+    guid: 47743fbd7349b1e468dd6929fbee7f72
   m_configObjects: {}
