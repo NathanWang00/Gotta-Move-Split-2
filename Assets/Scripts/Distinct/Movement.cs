@@ -376,7 +376,7 @@ namespace distinct {
                     run.Stop(); //Stops Running Sound From Continuing to play
                 }
                 //Stops running if the character is just standing on the ground
-                else if (coll.onGround && rb.velocity.x == 0 && Input.GetAxis("Horizontal") == 0f)
+                else if (coll.onGround && Input.GetAxis("Horizontal") == 0f)
                 {
                     run.Stop(); //Stops Running Sound From Continuing to play
                 }
