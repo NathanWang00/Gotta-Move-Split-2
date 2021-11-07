@@ -81,6 +81,18 @@ namespace distinct {
             Walk(dir);
             anim.SetHorizontalMovement(x, y, rb.velocity.y);
 
+            if (!Input.GetKeyDown("s"))
+            {
+                if (Input.GetButtonDown("Jump"))
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.99f);
+                } else
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.99f);
+                }
+                
+            }
+
             //fast falling
             if (Input.GetKeyDown("s") && rb.velocity.y < 0)
             {
@@ -137,7 +149,7 @@ namespace distinct {
             }
             else
             {
-                rb.gravityScale = 1.5f;
+                rb.gravityScale = 0.7f;
             }
 
             if (coll.onWall && !Input.GetButton("Jump"))
@@ -281,7 +293,7 @@ namespace distinct {
             yield return new WaitForSeconds(.3f);
 
             dashParticle.Stop();
-            rb.gravityScale = 1.5f;
+            rb.gravityScale = 0.7f;
             GetComponent<BetterJumping>().enabled = true;
             wallJumped = false;
             isDashing = false;
