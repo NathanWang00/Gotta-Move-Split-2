@@ -182,7 +182,7 @@ namespace distinct {
                     }
                 }
 
-                if (coll.onWall && !coll.onGround && wallSlide)
+                if (coll.onWall && !coll.onGround && (wallSlide || wallGrab))
                     WallJump();
             }
 
