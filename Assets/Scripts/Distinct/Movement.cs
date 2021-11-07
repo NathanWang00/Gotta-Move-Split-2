@@ -127,7 +127,7 @@ namespace distinct {
 
             if (wallGrab && !isDashing)
             {
-               // rb.gravityScale = 0;
+                rb.gravityScale = 0;
                 if (x > .2f || x < -.2f)
                     rb.velocity = new Vector2(rb.velocity.x, 0);
 
