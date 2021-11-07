@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallMultiplier: 3
-  lowJumpMultiplier: 1.3
+  lowJumpMultiplier: 8
 --- !u!61 &213030900
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -485,7 +485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   speed: 7
-  jumpForce: 10
+  jumpForce: 12
   slideSpeed: 1
   wallJumpLerp: 5
   dashSpeed: 40
